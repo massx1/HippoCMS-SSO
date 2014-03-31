@@ -59,17 +59,17 @@
       <groupId>org.onehippo.cms7</groupId>
       <artifactId>hippo-cms-plugins</artifactId>
     </dependency>
-    
-<!--    <dependency>
-      <groupId>org.hippoecm</groupId>
-      <artifactId>hippo-ecm-frontend-plugins</artifactId>
-      <version>${hippo.packages.version}</version>
-    </dependency>-->
 
     <dependency>
-      <groupId>org.example</groupId>
-      <artifactId>myhippoproject-content</artifactId>
+      <groupId>net.tirasa</groupId>
+      <artifactId>hipposso-content</artifactId>
       <version>${project.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>cas</groupId>
+      <artifactId>casclient</artifactId>
+      <version>2.1.1</version>
     </dependency>
     
     <!--  Gallery picker dependency -->

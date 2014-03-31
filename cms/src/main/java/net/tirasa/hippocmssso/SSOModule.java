@@ -1,5 +1,6 @@
 package net.tirasa.hippocmssso;
 
+import edu.yale.its.tp.cas.client.filter.CASFilter;
 import java.util.Map;
 import javax.security.auth.Subject;
 import javax.security.auth.callback.CallbackHandler;
@@ -22,11 +23,14 @@ public class SSOModule implements LoginModule {
 
         log.debug("Query string {}", WebApplicationHelper.retrieveWebRequest().getQueryString());
 
-        final String idFromQuery = WebApplicationHelper.retrieveWebRequest().getQueryString().split("=")[1];
+        final String sessoinUser = (String) WebApplicationHelper.retrieveWebRequest()
+                .getHttpServletRequest().getSession().getAttribute(CASFilter.CAS_FILTER_RECEIPT);
+        
+//        final String idFromQuery = WebApplicationHelper.retrieveWebRequest().getQueryString().split("=")[1];
         ((Map<String, String>) sharedState).put("javax.security.auth.login.name",
-                idFromQuery.isEmpty() ? "anonymous" : idFromQuery);
+                sessoinUser.isEmpty() ? "anonymous" : sessoinUser);
 
-        log.debug("Set username with {}", idFromQuery.isEmpty() ? "anonymous" : idFromQuery);
+        log.debug("Set username with {}", sessoinUser.isEmpty() ? "anonymous" : sessoinUser);
     }
 
     @Override

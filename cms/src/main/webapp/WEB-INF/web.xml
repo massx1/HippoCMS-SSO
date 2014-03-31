@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-    version="2.5" 
-    id="cms">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5" 
+         id="cms">
 
   <!-- General configuration -->
-  <display-name>My Hippo Project CMS</display-name>
-  <description>My Hippo Project CMS</description>
+  <display-name>Hippo SSO CMS</display-name>
+  <description>Hippo SSO CMS</description>
 
   <context-param>
     <description>The address of the repository</description>
@@ -21,13 +21,26 @@
   </context-param>
   <context-param>
     <description>The location of the repository configuration file. Unless the location
-    starts with file://, the location is retrieved from within the application package as
-    resource.</description>
+      starts with file://, the location is retrieved from within the application package as
+      resource.</description>
     <param-name>repository-config</param-name>
     <param-value>repository.xml</param-value>
   </context-param>
 
   <!--No concurrent logins-->
+  <filter>
+    <filter-name>CAS Authentication Filter</filter-name>
+    <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
+    <init-param>
+      <param-name>casServerLoginUrl</param-name>
+      <param-value>https://salice.tirasa.net:9443/cas/login</param-value>
+    </init-param>
+    <init-param>
+      <param-name>serverName</param-name>
+      <param-value>http://salice.tirasa.net</param-value>
+    </init-param>
+  </filter>
+  
   <filter>
     <filter-name>ConcurrentLogin</filter-name>
     <filter-class>org.hippoecm.frontend.plugins.login.ConcurrentLoginFilter</filter-class>
