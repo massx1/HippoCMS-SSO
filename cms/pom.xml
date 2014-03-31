@@ -61,8 +61,8 @@
     </dependency>
 
     <dependency>
-      <groupId>net.tirasa</groupId>
-      <artifactId>hipposso-content</artifactId>
+      <groupId>org.example</groupId>
+      <artifactId>myhippoproject-content</artifactId>
       <version>${project.version}</version>
     </dependency>
     
