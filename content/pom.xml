@@ -3,14 +3,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>net.tirasa</groupId>
-    <artifactId>hipposso</artifactId>
+    <groupId>org.example</groupId>
+    <artifactId>myhippoproject</artifactId>
     <version>1.01.00-SNAPSHOT</version>
   </parent>
 
-  <name>Hippo SSO content</name>
-  <description>Hippo SSO Content</description>
-  <artifactId>hipposso-content</artifactId>
+  <name>My Hippo Project content</name>
+  <description>My Hippo Project Content</description>
+  <artifactId>myhippoproject-content</artifactId>
 
   <build>
     <defaultGoal>install</defaultGoal>
