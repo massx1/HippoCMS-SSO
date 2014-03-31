@@ -8,10 +8,10 @@
     <version>7.7.7</version>
   </parent>
 
-  <name>My Hippo Project</name>
-  <description>My Hippo Project</description>
-  <groupId>org.example</groupId>
-  <artifactId>myhippoproject</artifactId>
+  <name>Hippo SSO</name>
+  <description>Hippo SSO</description>
+  <groupId>net.tirasa</groupId>
+  <artifactId>hipposso</artifactId>
   <version>1.01.00-SNAPSHOT</version>
   <packaging>pom</packaging>
 
