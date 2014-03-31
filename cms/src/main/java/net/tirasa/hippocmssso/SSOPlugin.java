@@ -1,10 +1,16 @@
 package net.tirasa.hippocmssso;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import javax.jcr.Credentials;
+import javax.security.auth.callback.Callback;
+import javax.security.auth.callback.CallbackHandler;
+import javax.security.auth.callback.NameCallback;
+import javax.security.auth.callback.PasswordCallback;
+import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.servlet.http.Cookie;
+import org.apache.jackrabbit.core.security.authentication.CredentialsCallback;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +34,10 @@ import org.hippoecm.frontend.plugins.login.LoginPlugin;
 import org.hippoecm.frontend.service.render.RenderPlugin;
 import org.hippoecm.frontend.session.LoginException;
 import org.hippoecm.frontend.session.PluginUserSession;
+import org.hippoecm.frontend.util.WebApplicationHelper;
+import org.hippoecm.repository.WebCredentials;
 
-public class SSOPlugin extends RenderPlugin implements Credentials {
+public class SSOPlugin extends RenderPlugin implements CallbackHandler {
 
     private static final long serialVersionUID = 6971843172794119352L;
 
@@ -107,5 +115,28 @@ public class SSOPlugin extends RenderPlugin implements Credentials {
 
         add(new FeedbackPanel("feedback").setEscapeModelStrings(false));
         add(new Label("pinger"));
+    }
+
+    @Override
+    public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
+        for (Callback callback : callbacks) {
+            if (callback instanceof NameCallback) {
+                NameCallback nameCallback = (NameCallback) callback;
+                String username = username();
+                if (username != null) {
+                    nameCallback.setName(username);
+                }
+            } else if (callback instanceof PasswordCallback) {
+            } else if (callback instanceof CredentialsCallback) {
+                CredentialsCallback credentialsCallback = (CredentialsCallback) callback;
+                credentialsCallback.setCredentials(
+                        new WebCredentials(((WebRequest) getRequest()).getHttpServletRequest()));
+            }
+        }
+    }
+
+    private String username() {
+        return (String) WebApplicationHelper.retrieveWebRequest()
+                .getHttpServletRequest().getSession().getAttribute("edu.yale.its.tp.cas.client.filter.receipt");
     }
 }
